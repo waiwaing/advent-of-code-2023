@@ -15,9 +15,15 @@ class Program
 {
 	public static void Main(string[] _)
 	{
-		Day2.Part1("test_input.txt");
-		Day2.Part1("input.txt");
-		Day2.Part2("test_input.txt");
-		Day2.Part2("input.txt");
+		var day = Type.GetType("Day3");
+		List<(string part, string filename)> invocations = [
+			("Part1", "test_input.txt"), ("Part1", "input.txt"),
+			("Part2", "test_input_2.txt"), ("Part2", "input.txt"),
+		];
+
+		foreach (var (part, filename) in invocations)
+		{
+			Console.WriteLine($"{day} {part} {filename}: {day!.GetMethod(part)!.Invoke(null, [filename])}");
+		}
 	}
 }
