@@ -9,13 +9,14 @@ class Utilities
 		return File.ReadAllLines(string.Join("/", components));
 	}
 
+	public static List<int> RangeAsList(int start, int length) => Enumerable.Range(start, length).ToList();
 }
 
 class Program
 {
 	public static void Main(string[] _)
 	{
-		var day = Type.GetType("Day3");
+		var day = Type.GetType("Day4");
 		List<(string part, string filename)> invocations = [
 			("Part1", "test_input.txt"), ("Part1", "input.txt"),
 			("Part2", "test_input_2.txt"), ("Part2", "input.txt"),
