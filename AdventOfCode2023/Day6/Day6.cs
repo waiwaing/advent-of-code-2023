@@ -1,12 +1,9 @@
 class Day6
 {
-	private static IEnumerable<int> IntsFrom(string input) =>
-		input.Split(" ").Where(x => !string.IsNullOrWhiteSpace(x)).Select(int.Parse);
-
 	public static string Part1(string inputFile)
 	{
 		var input = Utilities.GetInput(inputFile);
-		var races = Enumerable.Zip(IntsFrom(input[0].Split(":")[1]), IntsFrom(input[1].Split(":")[1]));
+		var races = Enumerable.Zip(Utilities.IntsFrom(input[0].Split(":")[1]), Utilities.IntsFrom(input[1].Split(":")[1]));
 
 		return races.Select(race =>
 		{

@@ -1,14 +1,11 @@
 class Day4
 {
-	private static IEnumerable<int> IntsFrom(string input) =>
-		input.Split(" ").Where(x => !string.IsNullOrWhiteSpace(x)).Select(int.Parse);
-
 	public static string Part1(string inputFile) =>
 		Utilities.GetInput(inputFile)
 			.Select(line =>
 			{
 				var parsed = line.Split(": ").Last().Split("|");
-				return (winning: IntsFrom(parsed[0]), have: IntsFrom(parsed[1]));
+				return (winning: Utilities.IntsFrom(parsed[0]), have: Utilities.IntsFrom(parsed[1]));
 			})
 			.Sum(res => (int)Math.Pow(2, res.have.Count(res.winning.Contains) - 1))
 			.ToString();
@@ -19,7 +16,7 @@ class Day4
 			.Select((line, i) =>
 			{
 				var parsed = line.Split(": ").Last().Split("|");
-				return (copies: 1, matches: IntsFrom(parsed[1]).Count(IntsFrom(parsed[0]).Contains));
+				return (copies: 1, matches: Utilities.IntsFrom(parsed[1]).Count(Utilities.IntsFrom(parsed[0]).Contains));
 			}).ToArray();
 
 		Utilities.RangeAsList(0, state.Length).ForEach(i => Utilities.RangeAsList(0, state[i].matches).ForEach(j =>

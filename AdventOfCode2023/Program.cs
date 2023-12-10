@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-class Utilities
+static class Utilities
 {
 	public static string[] GetInput(string inputFile, [CallerFilePath] string filepath = "")
 	{
@@ -10,13 +10,18 @@ class Utilities
 	}
 
 	public static List<int> RangeAsList(int start, int length) => Enumerable.Range(start, length).ToList();
+
+	public static IEnumerable<int> IntsFrom(string input) =>
+		input.Split(" ").Where(x => !string.IsNullOrWhiteSpace(x)).Select(int.Parse);
+
+	public static bool AllEqual<T>(this IEnumerable<T> enumerable) => enumerable.Distinct().Count() <= 1;
 }
 
 class Program
 {
 	public static void Main(string[] _)
 	{
-		var day = Type.GetType("Day8");
+		var day = Type.GetType("Day9");
 		List<(string part, string filename)> invocations = [
 			("Part1", "test_input.txt"), ("Part1", "input.txt"),
 			("Part2", "test_input_2.txt"), ("Part2", "input.txt"),
