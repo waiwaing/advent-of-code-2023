@@ -1,6 +1,6 @@
 namespace AdventOfCode2023;
 
-public class Point(int x, int y)
+public class Point(int x, int y) : IEquatable<Point>
 {
 	public int x = x, y = y;
 
@@ -9,14 +9,18 @@ public class Point(int x, int y)
 	public Point Left() => new(x, y - 1);
 	public Point Right() => new(x, y + 1);
 
+	public static bool operator ==(Point p1, Point p2) => p1.Equals(p2);
+	public static bool operator !=(Point p1, Point p2) => !p1.Equals(p2);
+
+	public bool Equals(Point? other) => (other is not null) && (x == other.x) && (y == other.y);
 
 	public override bool Equals(object? obj)
 	{
-		if (obj == null || GetType() != obj.GetType()) return false;
-		return x == (obj as Point)!.x && y == (obj as Point)!.y;
+		if (obj == null || obj is not Point) return false;
+		return Equals(obj as Point);
 	}
 
-	public override int GetHashCode() => 3 * x + 5 * y;
+	public override int GetHashCode() => 31 * x + 53 * y;
 
 	public bool Inside(int minX, int maxX, int minY, int maxY) => x >= minX && x <= maxX && y >= minY && y <= maxY;
 	public bool Inside(Point upperLeft, Point lowerRight) => Inside(upperLeft.x, lowerRight.x, upperLeft.y, lowerRight.y);
