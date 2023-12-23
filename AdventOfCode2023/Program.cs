@@ -15,13 +15,17 @@ static class Utilities
 		input.Split(" ").Where(x => !string.IsNullOrWhiteSpace(x)).Select(int.Parse);
 
 	public static bool AllEqual<T>(this IEnumerable<T> enumerable) => enumerable.Distinct().Count() <= 1;
+
+	public static List<string> TransposeGrid(List<string> grid) =>
+		Enumerable.Range(0, grid[0].Length).Select(i => string.Join("", grid.Select(line => line[i].ToString()))).ToList();
+
 }
 
 class Program
 {
 	public static void Main(string[] _)
 	{
-		var day = Type.GetType("Day13");
+		var day = Type.GetType("Day14");
 		List<(string part, string filename)> invocations = [
 			("Part1", "test_input.txt"), ("Part1", "input.txt"),
 			("Part2", "test_input_2.txt"), ("Part2", "input.txt"),

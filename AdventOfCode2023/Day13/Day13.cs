@@ -1,8 +1,5 @@
 class Day13
 {
-	public static List<string> TransposeGrid(List<string> grid) =>
-		Enumerable.Range(0, grid[0].Length).Select(i => string.Join("", grid.Select(line => line[i].ToString()))).ToList();
-
 	public static int? FindSymmetryIndex(List<string> grid, int indexToIgnore = -1)
 	{
 		for (int symmetryIndex = 0; symmetryIndex < grid.Count - 1; symmetryIndex++)
@@ -41,7 +38,7 @@ class Day13
 			{
 				var horizontalSymmetryIndex = FindSymmetryIndex(grid);
 				if (horizontalSymmetryIndex is not null) return 100 * (int) horizontalSymmetryIndex;
-				return (int) FindSymmetryIndex(TransposeGrid(grid))!;
+				return (int) FindSymmetryIndex(Utilities.TransposeGrid(grid))!;
 			}
 		).Sum().ToString();
 
@@ -49,7 +46,7 @@ class Day13
 		InputToGrids(Utilities.GetInput(inputFile)).Select(grid =>
 			{
 				var origHSI = FindSymmetryIndex(grid);
-				var origCSI = FindSymmetryIndex(TransposeGrid(grid));
+				var origCSI = FindSymmetryIndex(Utilities.TransposeGrid(grid));
 
 				for (int smudge = 0; smudge < grid.Count * grid[0].Length; smudge++)
 				{
@@ -57,7 +54,7 @@ class Day13
 
 					var hsi = FindSymmetryIndex(smudgedGrid, origHSI ?? -1);
 					if (hsi is not null) return 100 * (int) hsi;
-					var csi = FindSymmetryIndex(TransposeGrid(smudgedGrid), origCSI ?? -1);
+					var csi = FindSymmetryIndex(Utilities.TransposeGrid(smudgedGrid), origCSI ?? -1);
 					if (csi is not null) return (int) csi;
 				}
 
