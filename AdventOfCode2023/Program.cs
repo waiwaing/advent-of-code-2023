@@ -25,7 +25,7 @@ class Program
 {
 	public static void Main(string[] _)
 	{
-		var day = Type.GetType("Day19");
+		var day = Type.GetType("Day20");
 		List<(string part, string filename)> invocations = [
 			("Part1", "test_input.txt"), ("Part1", "input.txt"),
 			("Part2", "test_input_2.txt"), ("Part2", "input.txt"),
